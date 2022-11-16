@@ -1,17 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { NativeBaseProvider, Center, Text} from "native-base";
+import { NativeBaseProvider, StatusBar} from 'native-base';
 import { THEME } from './src/styles/theme'
-// import { useFonts, Roboto_400Regular, Roboto_500Medium, Roboto_700Blod  } from '@expo-google-fonts/roboto';
+import { useFonts, Roboto_400Regular, Roboto_500Medium  } from '@expo-google-fonts/roboto';
+
+import { SignIn } from './src/screens/Signin';
+import { Loading } from './src/components/Loading';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_500Medium });
+  
   return (
     <NativeBaseProvider theme={THEME}>
-      <Center flex={1} bgColor="gray.900">
-        <Text color="white" fontSize={24}>
-          Hallouuuu
-        </Text>
-        <StatusBar style="auto" />
-      </Center>
+      <StatusBar 
+          barStyle='light-content'
+          backgroundColor="transparent"
+          translucent
+        />
+        { fontsLoaded ? <SignIn /> : <Loading /> }    
     </NativeBaseProvider>
   );
 }
